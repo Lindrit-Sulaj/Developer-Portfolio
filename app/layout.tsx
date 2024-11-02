@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Hanken_Grotesk } from 'next/font/google'
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import Navbar from "@/components/navbar";
+import Particles from "@/components/ui/particles";
+
+const font = Hanken_Grotesk({
+  subsets: ['latin'],
+  display: 'swap'
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,9 +23,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${font.className} antialiased bg-background text-text`}
       >
+        <Particles
+          className='fixed top-0 w-full h-full left-0 -z-10'
+          quantity={140}
+          ease={80}
+          color="#dffbe5"
+          refresh
+        />
+        <Navbar />
         {children}
+        <div className="h-screen"></div>
       </body>
     </html>
   );
